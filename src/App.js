@@ -1,10 +1,13 @@
-import { NavBar, Layout } from "./components/index";
+import { Routes, Route } from "react-router-dom";
+import { NavBar, Layout,Rooms } from "./components/index";
 const App = () => {
   return <div>
     <Layout>
     <NavBar />
-    <div className="h-screen w-7/12 bg-mid-section">asd</div>
-    <div>asdd</div>
+    <Routes>
+      <Route path='/rooms' element={<Rooms />}/>
+    </Routes>
+   
     </Layout>
   </div>
 }
