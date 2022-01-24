@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { NavBar, Layout,Rooms } from "./components/index";
 const App = () => {
-  return <div>
+  return <div >
     <Layout>
     <NavBar />
     <Routes>

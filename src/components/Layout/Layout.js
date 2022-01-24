@@ -1,5 +1,5 @@
 const Layout = ({children})=> {
-    return <div className="flex">
+    return <div className="flex ">
         {children}
     </div>
 }

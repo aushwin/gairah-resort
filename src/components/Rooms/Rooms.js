@@ -1,19 +1,22 @@
-import { Fragment } from "react"
-import RoomItem from "./components/RoomItem"
+import { Fragment } from "react";
+import RoomList from "./components/RoomList";
 const Rooms = () => {
-    return <Fragment>
-        <div className="h-screen w-9/12 bg-mid-section flex flex-row flex-wrap flex-grow  overflow-y-scroll gap-1 ">
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
+  return (
+    <Fragment>
+      <div className="w-7/12 h-screen overflow-clip shadow-xl">
+        <div className="p-10">
+          <div className="flex justify-between items-center">
+            <div className="text-6xl font-light">Rooms</div>
+            <button className="bg-blue-500 p-3 px-7 rounded-lg">
+              Add Room
+            </button>
+          </div>
+          <div className="ml-1 text-gray-400">4</div>
         </div>
-        <div className="w-3/12">asdd</div> 
+        <RoomList />
+      </div>
     </Fragment>
-}
+  );
+};
 
-export default Rooms
+export default Rooms;

@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'mid-section': '#F3F5F7'
+        'mid-section': '#F3F5F7',
+        'room-item-hover': '#ECF3FE'
       }
     },
   },
