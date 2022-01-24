@@ -6,7 +6,8 @@ module.exports = {
     extend: {
       colors: {
         'mid-section': '#F3F5F7',
-        'room-item-hover': '#ECF3FE'
+        'room-item-hover': '#ECF3FE',
+        'room-button-primary' : '#A3DA8D'
       }
     },
   },
