@@ -4,6 +4,8 @@ import EditRoom from "./components/EditRoom";
 import RoomList from "./components/RoomList";
 const Rooms = () => {
     const totalRooms = useSelector((state) => state.rooms.rooms.length)
+    const roomDetails = useSelector((state) => state.rooms.roomDetails)
+    console.log(roomDetails)
   return (
     <Fragment>
       <div className="w-7/12 h-screen overflow-clip shadow-xl">
@@ -18,7 +20,7 @@ const Rooms = () => {
         </div>
         <RoomList />
       </div>
-      <EditRoom />
+      {Object.keys(roomDetails).length !==0 && <EditRoom/>}
     </Fragment>
   );
 };

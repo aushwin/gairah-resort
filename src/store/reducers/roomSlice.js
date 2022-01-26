@@ -23,8 +23,13 @@ export const roomsSlice = createSlice({
              const rooms = state.rooms
              const room = rooms.find((room)=>room.roomId===action.payload)
              state.roomDetails = room
-            
-            }
+             
+            },
+        updateRoom: (state,action)=>{
+             const roomUpdate =  state.rooms.find((room)=>room.roomId === state.roomDetails.roomId)
+             roomUpdate.roomName = action.payload.roomName
+             roomUpdate.roomPrice = action.payload.roomPrice
+        }
     }
 })
 
