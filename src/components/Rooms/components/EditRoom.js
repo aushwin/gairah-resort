@@ -1,10 +1,12 @@
-import { useState , useEffect} from "react";
-import {  useSelector } from "react-redux";
-
+import { useState , useEffect, useRef} from "react";
+import {  useDispatch, useSelector } from "react-redux";
+import { roomsSliceActions } from "../../../store/reducers/roomSlice";
 import CurrencyInput from 'react-currency-input-field';
+import { Alert } from "@mui/material";
 const EditRoom = () => {
   //style
-  
+   const dispatch = useDispatch();
+   const isChecked = useRef()
    const roomDetails =  useSelector(state => state.rooms.roomDetails)
    const [roomName,setRoomName]  = useState(roomDetails.roomName)
    const [roomPrice,setRoomPrice] = useState(roomDetails.roomPrice)
@@ -25,7 +27,9 @@ const EditRoom = () => {
 
    const onSubmitHandler = (event)=> {
      event.preventDefault()
+     
      console.log('price = ', roomPrice ,' name = ',roomName)
+     if(isChecked.current.checked)dispatch(roomsSliceActions.updateRoom({roomName,roomPrice}))
    }
 
  
@@ -47,11 +51,13 @@ const EditRoom = () => {
         <CurrencyInput className="shadow border rounded appearance-none py-2 px-3 focus:outline-none focus:shadow-outline ml-4 text-gray-700" prefix="₹" value={roomPrice} intlConfig={{ locale: 'en-IN', currency: 'INR' }} onValueChange={priceChangeHandler}/>
         </div>
         <div className="flex h-9 items-center">``
-          <input className="h-5 w-5"   type="checkbox" />
+          <input className="h-5 w-5"   type="checkbox" ref={isChecked} />
           <label className="ml-4 text-sm " htmlFor="roomUpdateCheck">Confirm Edit</label>
+          
         </div>
         <div className="text-center">
             <button className="bg-room-button-primary w-28 h-10 rounded hover:-translate-x-1 hover:-translate-y-1 hover:duration-500 duration-500 active:translate-x-0 active:translate-y-0">Update</button>
+           
         </div>
 
       </form>
