@@ -19,10 +19,10 @@ const CustomerRegistration = () => {
     }
   return (
     <div className="flex justify-center items-center h-full w-full">
-      <div className="bg-white h-4/6 w-4/6 p-5 justify-center shadow-xl">
-        <div className="text-4xl font-light">Register Guest</div>
-        <form className="flex flex-col justify-evenly items-center gap-5 mt-16" onSubmit={onGuestRegister}>
-          <div className="flex h-9 justify-around">
+      <div className="bg-white  w-4/6 p-5 justify-center shadow-xl">
+        <div className="text-4xl pt-10 font-light">Register Guest</div>
+        <form className="flex flex-col justify-evenly  gap-6 mt-16" onSubmit={onGuestRegister}>
+          <div className="flex h-9  justify-around">
             <label className="w-36 text-lg" htmlFor="guestName">
                Guest Name
             </label>
@@ -44,9 +44,9 @@ const CustomerRegistration = () => {
               
             />
           </div>
-          <div className="flex h-9 justify-start gap-12">
-              <label>Booked</label>
-              <Select  isMulti={true} options={options}   onChange={onBookingSelectHandler}/>
+          <div className="flex h-9 justify-around">
+              <label className="w-36">Booked</label>
+              <Select className="w-full"  isMulti={true} options={options}   onChange={onBookingSelectHandler}/>
           </div>
 
 
