@@ -1,20 +1,33 @@
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Select from 'react-select'
-import makeAnimated from 'react-select/animated';
-const CustomerRegistration = () => {
+const GuestRegistration = () => {
     const rooms = useSelector(state=>  state.rooms.rooms)
     const [selectedRoom , setSelectedRoom] = useState([])
     const nameRef = useRef()
-    const numberRef = useRef()
+    const [mobileNumber,setMobileNumber] = useState('')
     const options = rooms.filter((room)=>room.active===true).map(room=>{return {value:room.roomId , label:room.roomName}})
     const onBookingSelectHandler = (selectedBooking) => {
         setSelectedRoom(selectedBooking)
     }
+
+    const onNumberChangeHandler = (e)  => {
+      const numberRegex = /^[0-9\b]+$/;
+      console.log(e.target.value.length)
+      console.log(numberRegex.test(e.target.value))
+      if(e.target.value.length<=10){
+        if(numberRegex.test(e.target.value===' '||e.target.value)){
+          setMobileNumber(e.target.value)
+        }else if(e.target.value.length===0){
+          setMobileNumber('')
+        }
+      }else {
+      }
+      
+    }
     const onGuestRegister = (event)=>{
         event.preventDefault()
         console.log(nameRef.current.value)
-        console.log(numberRef.current.value)
         console.log(selectedRoom)
     }
   return (
@@ -30,6 +43,8 @@ const CustomerRegistration = () => {
               className="shadow border w-full rounded appearance-none py-2 px-3 focus:outline-none focus:shadow-outline ml-4 text-gray-700"
               type="text"
               ref={nameRef}
+              
+              required
             />
           </div>
           <div className="flex h-9 justify-around">
@@ -40,7 +55,8 @@ const CustomerRegistration = () => {
               className="shadow border w-full rounded appearance-none py-2 px-3 focus:outline-none focus:shadow-outline ml-4 text-gray-700"
               type="text"
               required
-              ref={numberRef}
+              value={mobileNumber}
+              onChange={onNumberChangeHandler}
               
             />
           </div>
@@ -52,7 +68,7 @@ const CustomerRegistration = () => {
 
           <div className="text-center">
             <button className="bg-room-button-primary w-28 h-10 rounded hover:-translate-x-1 hover:-translate-y-1 hover:duration-500 duration-500 active:translate-x-0 active:translate-y-0">
-              Update
+              Add
             </button>
           </div>
         </form>
@@ -61,4 +77,4 @@ const CustomerRegistration = () => {
   );
 };
 
-export default CustomerRegistration;
+export default GuestRegistration;

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { NavBar, Layout,Rooms } from "./components/index";
-import Customers from './components/Customers/Customers'
+import Guest from './components/Guest/Guest'
 const App = () => {
   return <div >
     <Layout>
@@ -8,7 +8,7 @@ const App = () => {
     <Routes>
       <Route path='/rooms' element={<Rooms />}/>
       {/* //TODO: fix path */}
-      <Route path='/customers' element={<Customers />} />
+      <Route path='/customers' element={<Guest />} />
     </Routes>
    
     </Layout>

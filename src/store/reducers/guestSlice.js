@@ -1,23 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const CUSTOMERVIEW = {
+export const GUESTVIEW = {
     register: 'register',
     edit: 'edit',
     visual: 'visual'
 }
 
 const initialState = {
-    toggleView: CUSTOMERVIEW.visual,
+    toggleView: GUESTVIEW.visual,
 }
 
-export const customerSlice = createSlice({
-    name: 'customer',
+export const guestSlice = createSlice({
+    name: 'guest',
     initialState,
     reducers: {
         toggleView : (state,action)=> {
             state.toggleView = action.payload
-        }
+        },
+         
     }
 })
 
-export const customerSliceActions = customerSlice.actions
+export const guestSliceActions = guestSlice.actions
