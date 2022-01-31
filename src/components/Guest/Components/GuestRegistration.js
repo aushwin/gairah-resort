@@ -1,8 +1,15 @@
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-select'
+import AlertHandler from "../../AlertHandler/AlertHandler";
+
+import { notificationSliceActions } from "../../../store/reducers/notificationSlice";
+
 const GuestRegistration = () => {
     const rooms = useSelector(state=>  state.rooms.rooms)
+    const notification = useSelector(state => state.notification.message)
+
+    const dispatch = useDispatch()
     const [selectedRoom , setSelectedRoom] = useState([])
     const nameRef = useRef()
     const [mobileNumber,setMobileNumber] = useState('')
@@ -27,6 +34,8 @@ const GuestRegistration = () => {
     }
     const onGuestRegister = (event)=>{
         event.preventDefault()
+        dispatch(notificationSliceActions.isSuccess('Guest Registerd Successfully !'))
+        setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
         console.log(nameRef.current.value)
         console.log(selectedRoom)
     }
@@ -47,6 +56,7 @@ const GuestRegistration = () => {
               required
             />
           </div>
+         
           <div className="flex h-9 justify-around">
             <label className="w-36 sm:text-lg" htmlFor="phonenumber">
              Number
