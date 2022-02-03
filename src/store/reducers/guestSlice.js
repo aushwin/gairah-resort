@@ -8,6 +8,7 @@ export const GUESTVIEW = {
 
 const initialState = {
     toggleView: GUESTVIEW.visual,
+    guests: []
 }
 
 export const guestSlice = createSlice({
@@ -17,6 +18,11 @@ export const guestSlice = createSlice({
         toggleView : (state,action)=> {
             state.toggleView = action.payload
         },
+        guestRegistration: (state,action) => {
+           const user = action.payload
+           //TODO : Update in db
+           state.guests.push(user)
+        } 
          
     }
 })

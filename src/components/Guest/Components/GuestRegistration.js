@@ -4,6 +4,7 @@ import Select from 'react-select'
 import AlertHandler from "../../AlertHandler/AlertHandler";
 
 import { notificationSliceActions } from "../../../store/reducers/notificationSlice";
+import { guestSliceActions } from "../../../store/reducers/guestSlice";
 
 const GuestRegistration = () => {
     const rooms = useSelector(state=>  state.rooms.rooms)
@@ -13,15 +14,13 @@ const GuestRegistration = () => {
     const [selectedRoom , setSelectedRoom] = useState([])
     const nameRef = useRef()
     const [mobileNumber,setMobileNumber] = useState('')
-    const options = rooms.filter((room)=>room.active===true).map(room=>{return {value:room.roomId , label:room.roomName}})
+    const options = rooms.filter((room)=>room.active===true).map(room=>{return {value:room , label:room.roomName}})
     const onBookingSelectHandler = (selectedBooking) => {
         setSelectedRoom(selectedBooking)
     }
 
     const onNumberChangeHandler = (e)  => {
       const numberRegex = /^[0-9\b]+$/;
-      console.log(e.target.value.length)
-      console.log(numberRegex.test(e.target.value))
       if(e.target.value.length<=10){
         if(numberRegex.test(e.target.value===' '||e.target.value)){
           setMobileNumber(e.target.value)
@@ -29,6 +28,7 @@ const GuestRegistration = () => {
           setMobileNumber('')
         }
       }else {
+
       }
       
     }
@@ -38,6 +38,11 @@ const GuestRegistration = () => {
         setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
         console.log(nameRef.current.value)
         console.log(selectedRoom)
+        dispatch(guestSliceActions.guestRegistration({
+          name: nameRef.current.value,
+          number: mobileNumber,
+          selectedRooms: selectedRoom
+        }))
     }
   return (
     <div className="flex justify-center items-center h-full w-full">

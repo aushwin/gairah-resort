@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { NavBar, Layout,Rooms } from "./components/index";
+import { NavBar, Layout,Rooms, Checkout } from "./components/index";
 import Guest from './components/Guest/Guest'
 import { useSelector } from "react-redux";
 import AlertHandler from "./components/AlertHandler/AlertHandler";
@@ -13,6 +13,8 @@ const App = () => {
       <Route path='/rooms' element={<Rooms />}/>
       {/* //TODO: fix path */}
       <Route path='/guests' element={<Guest />} />
+
+      <Route path='/checkout' element={ <Checkout/> } />
     </Routes>
    
     </Layout>
