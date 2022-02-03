@@ -34,6 +34,17 @@ const GuestRegistration = () => {
     }
     const onGuestRegister = (event)=>{
         event.preventDefault()
+        if(mobileNumber.length <10){
+          dispatch(notificationSliceActions.warning('Enter Valid Mobile Number !'))
+          setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
+          return
+        }
+
+        if(selectedRoom.length ===0){
+          dispatch(notificationSliceActions.warning('No Rooms Selected !'))
+          setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
+          return
+        }
         if(selectedRoom.length>0 ){
           dispatch(notificationSliceActions.isSuccess('Guest Registerd Successfully !'))
         setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
@@ -46,15 +57,7 @@ const GuestRegistration = () => {
         }))
         }
 
-        if(mobileNumber.length <10){
-          dispatch(notificationSliceActions.warning('Enter Valid Mobile Number !'))
-          setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
-        }
-
-        if(selectedRoom.length ===0){
-          dispatch(notificationSliceActions.warning('No Rooms Selected !'))
-          setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
-        }
+       
 
     }
   return (
