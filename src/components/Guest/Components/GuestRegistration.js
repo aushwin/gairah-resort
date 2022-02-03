@@ -14,7 +14,7 @@ const GuestRegistration = () => {
     const [selectedRoom , setSelectedRoom] = useState([])
     const nameRef = useRef()
     const [mobileNumber,setMobileNumber] = useState('')
-    const options = rooms.filter((room)=>room.active===true).map(room=>{return {value:room , label:room.roomName}})
+    const options = rooms.map(room=>{return {value:room , label:room.roomName}})
     const onBookingSelectHandler = (selectedBooking) => {
         setSelectedRoom(selectedBooking)
     }
@@ -34,7 +34,8 @@ const GuestRegistration = () => {
     }
     const onGuestRegister = (event)=>{
         event.preventDefault()
-        dispatch(notificationSliceActions.isSuccess('Guest Registerd Successfully !'))
+        if(selectedRoom.length>0 ){
+          dispatch(notificationSliceActions.isSuccess('Guest Registerd Successfully !'))
         setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
         console.log(nameRef.current.value)
         console.log(selectedRoom)
@@ -43,6 +44,18 @@ const GuestRegistration = () => {
           number: mobileNumber,
           selectedRooms: selectedRoom
         }))
+        }
+
+        if(mobileNumber.length <10){
+          dispatch(notificationSliceActions.warning('Enter Valid Mobile Number !'))
+          setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
+        }
+
+        if(selectedRoom.length ===0){
+          dispatch(notificationSliceActions.warning('No Rooms Selected !'))
+          setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
+        }
+
     }
   return (
     <div className="flex justify-center items-center h-full w-full">
@@ -77,7 +90,7 @@ const GuestRegistration = () => {
           </div>
           <div className="flex h-9 justify-around">
               <label className="w-36">Booked</label>
-              <Select className="w-full"  isMulti={true} options={options}   onChange={onBookingSelectHandler}/>
+              <Select className="w-full"  isMulti={true} options={options} required   onChange={onBookingSelectHandler}/>
           </div>
 
 

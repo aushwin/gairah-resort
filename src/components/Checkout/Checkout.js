@@ -51,7 +51,7 @@ const Checkout = () => {
           />
         </div>
 
-        <div>
+        <div className="mb-5">
         <div className="text-2xl font-light mb-5 border-b-2 py-6 ">
             Summary
           </div>
@@ -67,6 +67,10 @@ const Checkout = () => {
           <div className=" font-bold mb-2">
              Total : 5000
           </div>
+        </div>
+        
+        <div>
+          <button className="bg-green-400 px-5 py-2 rounded">Checkout</button>
         </div>
       </div>
       <div className="h-full w-full">
