@@ -1,10 +1,10 @@
 import { Request, Response, Router } from "express";
 
-import { addRooms,editRoom,getRooms } from "../controllers/room.controller";
+import { addRooms,editRoom,fetchRooms } from "../controllers/room.controller";
 export const router = Router()
 
 router.route('/')
-      .get(getRooms)
+      .get(fetchRooms)
       .post(addRooms)
 
 

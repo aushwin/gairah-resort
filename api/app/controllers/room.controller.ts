@@ -14,7 +14,7 @@ export const addRooms = async (req: Request, res: Response) => {
 
 };
 
-export const getRooms = async (req:Request , res: Response) => {
+export const fetchRooms = async (req:Request , res: Response) => {
     const rooms = await Room.find({})
     res.send(rooms)
 }

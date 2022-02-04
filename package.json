@@ -1,6 +1,7 @@
 {
   "name": "gairah-resort",
   "version": "0.1.0",
+  "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -11,6 +12,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.2",
+    "axios": "^0.25.0",
     "postcss": "^8.4.5",
     "react": "^17.0.2",
     "react-currency-input-field": "^3.6.4",

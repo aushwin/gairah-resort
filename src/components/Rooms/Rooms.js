@@ -1,11 +1,17 @@
-import { Fragment } from "react";
+import { useDispatch } from "react-redux";
+
+import { Fragment, useEffect } from "react";
 import { useSelector } from "react-redux";
 import EditRoom from "./components/EditRoom";
 import RoomList from "./components/RoomList";
+import { fetchAllRooms } from "../../store/reducers/roomSlice";
 const Rooms = () => {
   const totalRooms = useSelector((state) => state.rooms.rooms.length);
   const roomDetails = useSelector((state) => state.rooms.roomDetails);
-  console.log(roomDetails);
+  const dispatch = useDispatch() 
+  useEffect(()=>{
+    dispatch(fetchAllRooms())
+  },[dispatch])
   return (
     <Fragment>
       <div className="w-7/12 h-screen overflow-clip shadow-xl">

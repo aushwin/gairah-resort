@@ -1,16 +1,8 @@
-import { createSlice,current } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
-    rooms: [
-        {roomId: 'FBC1',roomName: 'Full Bamboo Cottage 1',roomPrice:499,active:false},
-        {roomId: 'FBC2',roomName: 'Full Bamboo Cottage 2',roomPrice:599,active:true},
-        {roomId: 'HBC1',roomName: 'Half Bamboo Cottage 1',roomPrice:399,active:false},
-        {roomId: 'HBC2',roomName: 'Half Bamboo Cottage 2',roomPrice:299,active:false},
-        {roomId: 'HBC3',roomName: 'Half Bamboo Cottage 3',roomPrice:299,active:false},
-        {roomId: 'HBC4',roomName: 'Half Bamboo Cottage 4',roomPrice:699,active:false},
-        {roomId: 'HBC5',roomName: 'Half Bamboo Cottage 5',roomPrice:799,active:false},
-        {roomId: 'HBC6',roomName: 'Half Bamboo Cottage 6',roomPrice:899,active:false}
-    ],
+    rooms: [],
     roomDetails: {}
 
 }
@@ -30,7 +22,22 @@ export const roomsSlice = createSlice({
              roomUpdate.roomPrice = action.payload.roomPrice
              state.roomDetails = {}
         }
+    },
+    extraReducers: (builder)=>{
+        builder.addCase(fetchAllRooms.fulfilled,(state,action)=>{
+            state.rooms = action.payload
+        })
     }
+
 })
+
+// Async Thunks
+export const fetchAllRooms = createAsyncThunk(
+    'rooms/fetchRooms',
+    async (thunkAPI) => {
+        const response = await axios.get('api/rooms/')
+        return response.data
+    }
+)
 
 export const roomsSliceActions = roomsSlice.actions

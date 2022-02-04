@@ -1,10 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import { NavBar, Layout,Rooms, Checkout } from "./components/index";
 import Guest from './components/Guest/Guest'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AlertHandler from "./components/AlertHandler/AlertHandler";
+import { useEffect } from "react";
+import { fetchAllRooms } from "./store/reducers/roomSlice";
 const App = () => {
+
   const notificationMessage = useSelector(state=>state.notification.message)
+  const dispatch = useDispatch()
+  
+  useEffect(()=>{
+    dispatch(fetchAllRooms())
+  },[dispatch])
   return <div >
     <Layout>
     <NavBar />
