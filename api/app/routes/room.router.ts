@@ -1,11 +1,12 @@
 import { Request, Response, Router } from "express";
 
-import { addRooms } from "../controllers/room.controller";
+import { addRooms,getRooms } from "../controllers/room.controller";
 export const router = Router()
 
 router.route('/')
-      .get((req,res)=>res.send('Hello from room'))
+      .get(getRooms)
       .post(addRooms)
+
 
 
 
