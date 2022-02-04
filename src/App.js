@@ -4,7 +4,7 @@ import Guest from './components/Guest/Guest'
 import { useDispatch, useSelector } from "react-redux";
 import AlertHandler from "./components/AlertHandler/AlertHandler";
 import { useEffect } from "react";
-import { fetchAllRooms } from "./store/reducers/roomSlice";
+import { editRoom, fetchAllRooms } from "./store/reducers/roomSlice";
 const App = () => {
 
   const notificationMessage = useSelector(state=>state.notification.message)
@@ -12,6 +12,7 @@ const App = () => {
   
   useEffect(()=>{
     dispatch(fetchAllRooms())
+    dispatch(editRoom())
   },[dispatch])
   return <div >
     <Layout>

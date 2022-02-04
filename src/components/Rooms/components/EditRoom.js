@@ -4,8 +4,7 @@ import CurrencyInput from "react-currency-input-field";
 
 import { roomsSliceActions } from "../../../store/reducers/roomSlice";
 import { notificationSliceActions } from "../../../store/reducers/notificationSlice";
-import AlertHandler from "../../AlertHandler/AlertHandler";
-
+import { editRoom } from "../../../store/reducers/roomSlice";
 const EditRoom = () => {
   //style
   const dispatch = useDispatch();
@@ -36,15 +35,11 @@ const EditRoom = () => {
 
     console.log("price = ", roomPrice, " name = ", roomName);
     if (isChecked.current.checked) {
-      dispatch(roomsSliceActions.updateRoom({ roomName, roomPrice }));
-      dispatch(
-        notificationSliceActions.isSuccess  (
-          "Room Updated Successfully"
-        )
-      );
-      setTimeout(() => {
-        dispatch(notificationSliceActions.reset());
-      }, 3000);
+       dispatch(editRoom({
+         roomId: roomDetails.roomId,
+         roomPrice: roomPrice,
+         roomName: roomName
+       }));
 
     } else {
       dispatch(

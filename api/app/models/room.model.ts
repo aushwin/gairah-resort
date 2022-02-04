@@ -1,4 +1,4 @@
-import { Schema, model, Model, Document, Error } from "mongoose";
+import { Schema, model, Model, Document } from "mongoose";
 
 export interface IRoom {
   roomId: String;
@@ -12,7 +12,7 @@ interface IRoomDocument extends IRoom, Document {
 }
 
 export interface IRoomModel extends Model<IRoomDocument> {
-  editRoom: (roomId: String, roomName: String, roomPrice: number, roomStatus: boolean) => Promise<IRoomDocument> 
+  editRoom: (roomId: String, roomName: String, roomPrice: number) => Promise<IRoomDocument> 
 }
 
 const roomSchema = new Schema<IRoomDocument>({
@@ -35,8 +35,8 @@ const roomSchema = new Schema<IRoomDocument>({
 });
 
 
-roomSchema.statics.editRoom = async function(roomId: String, roomName: String, roomPrice: number, roomStatus: boolean) {
-  const response = await this.findOneAndUpdate({roomId},{roomId,roomName,roomPrice,roomStatus},{new: true})
+roomSchema.statics.editRoom = async function(roomId: String, roomName: String, roomPrice: number) {
+  const response = await this.findOneAndUpdate({roomId},{roomId,roomName,roomPrice},{new: true})
   if(response) return response
   else throw new Error('Wrong Room Id')
  
