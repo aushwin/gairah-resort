@@ -5,6 +5,14 @@
   "author": "aushwin",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongoose": "^6.2.0"
+  },
+  "scripts": {
+    "start": "nodemon app.mjs"
+  },
+  "devDependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
   }
 }
