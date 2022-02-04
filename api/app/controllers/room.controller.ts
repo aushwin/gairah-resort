@@ -9,9 +9,7 @@ export const addRooms = async (req: Request, res: Response) => {
        const savedRoom = await room.roomSave();
        res.send(savedRoom)
     }catch(e:unknown){
-        if(e instanceof Error) {
-            res.status(406).json({'message':e.message})
-        }
+        if(e instanceof Error) res.status(406).json({'message':e.message})
     }
 
 };
@@ -19,4 +17,18 @@ export const addRooms = async (req: Request, res: Response) => {
 export const getRooms = async (req:Request , res: Response) => {
     const rooms = await Room.find({})
     res.send(rooms)
+}
+
+
+export const editRoom = async (req:Request,res: Response) => {
+    const roomId = req.params.id
+    const {roomName,roomPrice,roomStatus}: IRoom = req.body
+    
+    try{
+       const response =  await Room.editRoom(roomId,roomName,roomPrice,roomStatus)
+       res.status(200).send(response)
+    }catch(e:unknown){
+        if(e instanceof Error) res.status(406).json({'message': e.message})
+    }
+
 }

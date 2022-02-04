@@ -8,12 +8,11 @@ export interface IRoom {
 }
 
 interface IRoomDocument extends IRoom, Document {
-  roomSave: () => Promise<void>;
+  roomSave: () => Promise<IRoomDocument>;
 }
 
 export interface IRoomModel extends Model<IRoomDocument> {
-  // getRoomById: (roomId: String) => Promise<void>;
-  //type static methods here
+  editRoom: (roomId: String, roomName: String, roomPrice: number, roomStatus: boolean) => Promise<IRoomDocument> 
 }
 
 const roomSchema = new Schema<IRoomDocument>({
@@ -36,10 +35,16 @@ const roomSchema = new Schema<IRoomDocument>({
 });
 
 
+roomSchema.statics.editRoom = async function(roomId: String, roomName: String, roomPrice: number, roomStatus: boolean) {
+  const response = await this.findOneAndUpdate({roomId},{roomId,roomName,roomPrice,roomStatus},{new: true})
+  if(response) return response
+  else throw new Error('Wrong Room Id')
+ 
+}
 
 
 roomSchema.methods.roomSave = async function (this: IRoomDocument) {
-  const room =await Room.find({roomId:this.roomId});
+  const room = await Room.find({roomId:this.roomId});
   if(room.length===0){
     const savedRoom = await this.save();
     return savedRoom;

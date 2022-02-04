@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import { addRooms,getRooms } from "../controllers/room.controller";
+import { addRooms,editRoom,getRooms } from "../controllers/room.controller";
 export const router = Router()
 
 router.route('/')
@@ -8,7 +8,8 @@ router.route('/')
       .post(addRooms)
 
 
-
+router.route('/edit/:id')
+      .post(editRoom)
 
 
 export default router;
