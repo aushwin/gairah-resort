@@ -5,3 +5,6 @@ const router = Router()
 
 router.route('/')
       .post(addGuest)
+
+
+export default router;

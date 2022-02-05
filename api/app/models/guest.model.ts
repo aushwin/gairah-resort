@@ -1,7 +1,7 @@
 import {Schema,model,Model,Document,Types} from 'mongoose'
 import { IRoomDocument } from './room.model';
 
-interface IGuest {
+export interface IGuest {
     guestName: String;
     guestNumber: String;
     selectedRooms: Array<IRoomDocument>
@@ -10,6 +10,8 @@ interface IGuest {
 
 interface IGuestDocument extends IGuest, Document {
     //methods
+    addGuest : (this: IGuestDocument) => Promise<void>
+
 }
 
 interface IGuestModel extends Model<IGuestDocument> {
@@ -28,5 +30,17 @@ const guestSchema = new Schema<IGuestDocument>({
     selectedRooms: [],
     foodBill : []
 })
+
+guestSchema.methods.addGuest = async function(this: IGuestDocument){
+    const guest = await Guest.find({guestNumber: this.guestNumber})
+    if(guest.length===0){
+        const response = await this.save()
+        return response;
+    }else {
+        throw new Error('Guest previously registered')
+    }
+
+}
+
 
 export const Guest = model<IGuestDocument,IGuestModel>("guest", guestSchema)
