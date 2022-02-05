@@ -6,10 +6,12 @@ import {useEffect} from 'react'
 
 const Guest = () => {
     const dispatch = useDispatch()
-    useEffect(()=>{
-        dispatch(fetchGuests())
-    },[dispatch])
     const toggleView = useSelector(state=>state.guest.toggleView)
+    useEffect(()=>{
+        if(toggleView===GUESTVIEW.visual){
+            dispatch(fetchGuests())
+        }
+    },[dispatch,toggleView])
     const renderView = () => {
         switch(toggleView){
             case GUESTVIEW.register: return <GuestRegistration />

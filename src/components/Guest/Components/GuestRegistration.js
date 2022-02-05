@@ -4,7 +4,7 @@ import Select from 'react-select'
 import AlertHandler from "../../AlertHandler/AlertHandler";
 
 import { notificationSliceActions } from "../../../store/reducers/notificationSlice";
-import { guestSliceActions } from "../../../store/reducers/guestSlice";
+import { addGuest, guestSliceActions } from "../../../store/reducers/guestSlice";
 
 const GuestRegistration = () => {
     const rooms = useSelector(state=>  state.rooms.rooms)
@@ -32,6 +32,7 @@ const GuestRegistration = () => {
       }
       
     }
+
     const onGuestRegister = (event)=>{
         event.preventDefault()
         if(mobileNumber.length <10){
@@ -46,15 +47,14 @@ const GuestRegistration = () => {
           return
         }
         if(selectedRoom.length>0 ){
-          dispatch(notificationSliceActions.isSuccess('Guest Registerd Successfully !'))
-        setTimeout(()=>dispatch(notificationSliceActions.reset()),3000)
-        console.log(nameRef.current.value)
-        console.log(selectedRoom)
-        dispatch(guestSliceActions.guestRegistration({
-          name: nameRef.current.value,
-          number: mobileNumber,
+        
+
+        const guest = {
+          guestName: nameRef.current.value,
+          guestNumber: mobileNumber,
           selectedRooms: selectedRoom
-        }))
+        }
+        dispatch(addGuest(guest))
         }
 
        

@@ -26,7 +26,7 @@ export const addGuest =async (req:Request,res:Response)=>{
         res.send(response)
     }catch(e:unknown){
         if(e instanceof Error){
-            res.send(e.message)
+            res.status(406).send(e.message)
         }
     }
 }
