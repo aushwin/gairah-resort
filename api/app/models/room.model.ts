@@ -7,7 +7,7 @@ export interface IRoom {
   roomStatus: boolean;
 }
 
-interface IRoomDocument extends IRoom, Document {
+export interface IRoomDocument extends IRoom, Document {
   roomSave: () => Promise<IRoomDocument>;
 }
 
@@ -44,7 +44,7 @@ roomSchema.statics.editRoom = async function(roomId: String, roomName: String, r
 
 
 roomSchema.methods.roomSave = async function (this: IRoomDocument) {
-  const room = await Room.find({roomId:this.roomId});
+  const room = await Room.find({roomId:this.roomId}); 
   if(room.length===0){
     const savedRoom = await this.save();
     return savedRoom;

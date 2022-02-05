@@ -26,11 +26,6 @@ export const editRoom = async (req: Request, res: Response) => {
     const response = await Room.editRoom(roomId, roomName, roomPrice);
     res.status(200).json(response);
   } catch (e: unknown) {
-    if (e instanceof Error) {
-        console.log(e.message)
-      res.statusMessage = e.message;
-      res.statusCode = 406
-      res.end()
-    }
+    if (e instanceof Error) res.status(406).end()
   }
 };
