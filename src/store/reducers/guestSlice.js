@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice , createAsyncThunk} from "@reduxjs/toolkit";
 
 export const GUESTVIEW = {
     register: 'register',
@@ -8,8 +8,12 @@ export const GUESTVIEW = {
 
 const initialState = {
     toggleView: GUESTVIEW.visual,
-    guests: []
+    guests: [],
+    toEdit: {}
 }
+
+
+
 
 export const guestSlice = createSlice({
     name: 'guest',
@@ -26,5 +30,7 @@ export const guestSlice = createSlice({
          
     }
 })
+
+
 
 export const guestSliceActions = guestSlice.actions

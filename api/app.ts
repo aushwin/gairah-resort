@@ -12,6 +12,6 @@ connect()
 routerInit(app)
 
 
-app.listen(3000,()=>{
+app.listen(8080,()=>{
     console.log(COLORS.BgGreen,`***************Gairah Server Started on PORT ${8080} ***************`)
 })
