@@ -1,8 +1,14 @@
 import SideImage from './../../assets/register.png'
-import { GUESTVIEW } from '../../store/reducers/guestSlice' 
-import { useSelector } from 'react-redux'
+import { fetchGuests, GUESTVIEW } from '../../store/reducers/guestSlice' 
+import { useDispatch, useSelector } from 'react-redux'
 import { GuestRegistration,GuestList,GuestEdit } from './Components/index'
+import {useEffect} from 'react'
+
 const Guest = () => {
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(fetchGuests())
+    },[dispatch])
     const toggleView = useSelector(state=>state.guest.toggleView)
     const renderView = () => {
         switch(toggleView){

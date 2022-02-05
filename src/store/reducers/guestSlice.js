@@ -1,4 +1,5 @@
 import { createSlice , createAsyncThunk} from "@reduxjs/toolkit";
+import axios from 'axios'
 
 export const GUESTVIEW = {
     register: 'register',
@@ -12,7 +13,13 @@ const initialState = {
     toEdit: {}
 }
 
-
+export const fetchGuests = createAsyncThunk(
+    'guest/fetchGuests',
+    async()=>{
+        const response = await axios.get('api/guests')
+        return response.data
+    }
+)
 
 
 export const guestSlice = createSlice({
@@ -28,6 +35,11 @@ export const guestSlice = createSlice({
            state.guests.push(user)
         } 
          
+    },
+    extraReducers: {
+        [fetchGuests.fulfilled] : (state,action)=>{
+            state.guests = action.payload
+        }
     }
 })
 

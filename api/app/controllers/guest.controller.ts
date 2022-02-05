@@ -2,7 +2,15 @@ import {Request , Response} from 'express'
 import { Guest, IGuest } from '../models/guest.model'
 
 
-
+export const fetchGuest = async(req:Request, res:Response) => {
+    try {
+        const response = await Guest.find()
+        res.send(response);
+    }catch(e){
+        if(e instanceof Error) console.log(e.message)
+        else console.log(e)
+    }
+}
 
 export const addGuest =async (req:Request,res:Response)=>{
     const guestData: IGuest = req.body
