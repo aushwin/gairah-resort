@@ -51,7 +51,13 @@ export const guestSlice = createSlice({
            const user = action.payload
            //TODO : Update in db
            state.guests.push(user)
-        } 
+        },
+        getGuestEdit: (state,action) => {
+            const guests = state.guests
+            const guest = guests.filter((guest)=>guest.guestNumber===action.payload)
+            state.toEdit = guest[0]
+            state.toggleView = GUESTVIEW.edit
+        }
          
     },
     extraReducers: {

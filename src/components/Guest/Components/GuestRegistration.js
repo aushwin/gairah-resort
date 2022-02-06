@@ -9,12 +9,14 @@ import { addGuest, guestSliceActions } from "../../../store/reducers/guestSlice"
 const GuestRegistration = () => {
     const rooms = useSelector(state=>  state.rooms.rooms)
     const notification = useSelector(state => state.notification.message)
-
     const dispatch = useDispatch()
+    
     const [selectedRoom , setSelectedRoom] = useState([])
-    const nameRef = useRef()
     const [mobileNumber,setMobileNumber] = useState('')
+    const nameRef = useRef()
+
     const options = rooms.map(room=>{return {value:room , label:room.roomName}})
+    
     const onBookingSelectHandler = (selectedBooking) => {
         setSelectedRoom(selectedBooking)
     }

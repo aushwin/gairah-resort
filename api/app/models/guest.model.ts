@@ -15,7 +15,8 @@ interface IGuestDocument extends IGuest, Document {
 }
 
 interface IGuestModel extends Model<IGuestDocument> {
-    // static methods 
+    // static methods
+    editGuest: (guestName:String,guestNumber:String,selectedRooms:Array<IRoomDocument>)=>Promise<IGuestDocument>
 }
 
 const guestSchema = new Schema<IGuestDocument>({
@@ -30,6 +31,12 @@ const guestSchema = new Schema<IGuestDocument>({
     selectedRooms: [],
     foodBill : []
 })
+
+guestSchema.statics.editGuest = async function(guestName:String,guestNumber:String,selectedRooms:Array<IRoomDocument>){
+    const response = await this.findOneAndUpdate({guestNumber},{guestName,guestNumber,selectedRooms},{new: true})
+    if(response) return response
+    else throw new Error('Guest not found')
+}
 
 guestSchema.methods.addGuest = async function(this: IGuestDocument){
     const guest = await Guest.find({guestNumber: this.guestNumber})
