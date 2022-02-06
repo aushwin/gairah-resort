@@ -39,6 +39,23 @@ export const addGuest = createAsyncThunk(
     }
 )
 
+export const editGuest = createAsyncThunk(
+    'guest/editGuest',
+    async(guest,thunkAPI) => {
+        try{
+            console.log(guest,'from async thunk')
+            const response = await axios.post('api/guests/edit',guest)
+            thunkAPI.dispatch(notificationSliceActions.isSuccess('Guest Updated'))
+            setTimeout(()=>thunkAPI.dispatch(notificationSliceActions.reset()),5000) 
+            return response.data
+        }catch(e){
+            thunkAPI.dispatch(notificationSliceActions.isSuccess('Guest with same number exists'))
+            setTimeout(()=>thunkAPI.dispatch(notificationSliceActions.reset()),5000) 
+            throw new Error('Number not Unqiue')
+        }
+    }
+)
+
 
 export const guestSlice = createSlice({
     name: 'guest',
@@ -66,6 +83,10 @@ export const guestSlice = createSlice({
         },
         [addGuest.fulfilled]: (state,action)=>{
           
+        },
+        [editGuest.fulfilled]: (state,action)=>{
+            state.toEdit = {}
+            state.toggleView = GUESTVIEW.visual
         }
         
     }
