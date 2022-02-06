@@ -32,9 +32,9 @@ export const addGuest =async (req:Request,res:Response)=>{
 }
 
 export const editGuest = async(req:Request,res:Response)=>{
-    const {guestName,guestNumber,selectedRooms} = req.body
+    const {guestName,guestNumber,selectedRooms,editedNumber} = req.body
     try {
-        const response = await Guest.editGuest(guestName,guestNumber,selectedRooms)
+        const response = await Guest.editGuest(guestName,guestNumber,selectedRooms,editedNumber)
         res.status(200).json(response)
     }catch(e:unknown){
         if(e instanceof Error) res.status(406).end()
